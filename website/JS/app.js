@@ -1,6 +1,5 @@
 /* Global Variables */
-let Url = "https://api.openweathermap.org/data/2.5/forecast?zip=", 
- apiKey = "&units=imperial&appid=834f67f9fbd8063374b8d61f5a0fbf95",           
+let Url = "https://api.openweathermap.org/data/2.5/forecast?zip=",          
  generateBTn = document.querySelector("#generate"),          
  dateToday = document.querySelector("#date"),               
  tempToday = document.querySelector("#temp"),  
@@ -13,9 +12,10 @@ let Url = "https://api.openweathermap.org/data/2.5/forecast?zip=",
 
 /* trigger a callback function with a click event on button */
 generateBTn.addEventListener("click",()=>{    
-    const zipValue = document.querySelector("#zip").value;
-    const feelingValue = document.querySelector("#feelings").value;
-    const fullUrl = `${Url}${zipValue}${apiKey}`;
+    const apiKey = "&units=imperial&appid=834f67f9fbd8063374b8d61f5a0fbf95", 
+     zipValue = document.querySelector("#zip").value,
+    feelingValue = document.querySelector("#feelings").value,
+     fullUrl = `${Url}${zipValue}${apiKey}`;
     weatherInfo(fullUrl,zipValue) //trigger another callback function
     .then((getdata)=>{
             postData("/postData",{
@@ -72,11 +72,11 @@ const updateUI = async ()=>{
     const req = await fetch("/receivedData");
     try{
         const allData = await req.json();
-        dateToday.innerText = `Date: ${allData[0].date}`;
-        city.innerText =  `City: ${allData[0].city}`;
-        country.innerText = `Country: ${allData[0].country}`;
-        tempToday.innerText =  `Temperature: ${allData[0].temp}`;
-        feelingToday.innerText = `I feel: ${allData[0].content}`;
+        dateToday.innerText = `Date: ${allData.date}`;
+        city.innerText =  `City: ${allData.city}`;
+        country.innerText = `Country: ${allData.country}`;
+        tempToday.innerText =  `Temperature: ${allData.temp}`;
+        feelingToday.innerText = `I feel: ${allData.content}`;
     }
     catch(error){
         console.log("error",error);
